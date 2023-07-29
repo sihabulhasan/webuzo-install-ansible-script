@@ -1,0 +1,12 @@
+# This script is specially made to install and maintain our webuzo shared hosting servers
+# Author: Sihabul Hasan
+---
+- name: Install Webuzo Server
+  hosts: webuzo
+  become: yes
+  gather_facts: True
+  strategy: free # Run Tasks on all the servers as fast as possible without waiting for other
+  roles:
+    - webuzo
+    - csf
+    - softaculous-configuration

@@ -1,0 +1,34 @@
+---
+#Creating webuzo Hositng Plans
+
+- name: Create required webuzo folder structure
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  with_items:
+    - { path: "/var/webuzo/plans/", mode: "0755" }
+    - { path: "/var/webuzo/features", mode: "0755" }
+
+
+- name: Copy hosting packages
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: webuzo
+    group: webuzo
+    mode: 0770
+  with_items:
+    - { src: "nut_starter", dest: "/var/webuzo/plans/pack1"}   # Packages are called from roles > webuzo > files
+  tags: webuzo
+
+- name: Copy hosting features
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: webuzo
+    group: webuzo
+    mode: 0770
+  with_items:
+    - { src: "all_feature", dest: "/var/webuzo/features/all_feature"}   # Features are called from roles > webuzo > files
+  tags: webuzo

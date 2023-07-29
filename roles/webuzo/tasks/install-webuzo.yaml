@@ -1,0 +1,19 @@
+---
+  - name: Fetch webuzo
+    ansible.builtin.get_url:
+      url: http://files.webuzo.com/install.sh
+      dest: /home
+      mode: 0755
+      force: yes
+      validate_certs: false
+    when: webuzo_installed is not defined
+
+  - name: Install webuzo
+    command: chdir=/home ./install.sh --install
+    async: 1200 #wait for upto 20 minutes
+    poll: 120 #check every 2 minutes
+    register: webuzo_install_completed
+    when: webuzo_installed is not defined
+    notify: 
+      - Install Cloulinux Plugin for Webuzo
+      - Install Bind Soft

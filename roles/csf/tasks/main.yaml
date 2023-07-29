@@ -1,0 +1,21 @@
+---
+# CSF Firewall Installation
+  - name: Check if CSF is installed
+    stat:
+      path: /usr/sbin/csf
+    register: csf_check
+    changed_when: false
+    check_mode: no
+    tags: always
+  - name: Create csf_installed variable.
+    set_fact:
+      csf_installed: "{{ csf_check.stat.exists|bool }}"
+    check_mode: no
+    tags: always
+
+  - name: Install CSF
+    command: webuzo --installapp --soft=62    # 62 is CSF app id. The app id is collected from here: http://api.webuzo.com/apps.php
+    when: csf_installed == false
+    
+  - name: Changing csf configuration
+    include_tasks: csf-configure.yaml

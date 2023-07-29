@@ -1,0 +1,31 @@
+---
+  - name: Check wheather MariaDB is installed
+    stat:
+      path: '/var/lib/mysql/mysql/user.frm'
+    register: mariadb_check
+    check_mode: no
+    failed_when: false
+    changed_when: false
+
+  - name: Register webuzo_installed variable
+    set_fact:
+      mariadb_installed: true
+    when: mariadb_check.stat.exists
+  
+  - name: Delete MySQL to install MariaDB
+    file:
+      state: absent
+      path: /var/lib/mysql
+    when: mariadb_installed is not defined
+
+  - name: Remove MySQL    #For installing MariaDB, it is need to fully remove MySQL.
+    dnf:
+      pkg:
+        - mysql-community-client
+      state: absent
+    become: true
+    when: mariadb_installed is not defined
+
+  - name: Install MariaDB 10.6
+    command: webuzo --installapp --soft=155   # 155 is MariaDB 10.6 app id. The app id is collected from here: http://api.webuzo.com/apps.php
+    when: mariadb_installed is not defined

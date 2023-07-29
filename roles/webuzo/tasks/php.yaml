@@ -1,0 +1,103 @@
+---
+  - name: Install PHP Versions
+    command: webuzo --installapp --soft="{{item}}"
+    with_items:
+      - "{{phpversions}}"  #location: group_vars > all > phpversions. From this location php versions are called by the app ids.
+
+  - name: Set date.timezone for CLI
+    lineinfile:
+      dest: "{{item}}"
+      regexp: "date.timezone ="
+      line: "date.timezone = Asia/Dhaka"
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}" # php_path is called from group_vers > all > php_path
+
+  - name: set PHP memory limit
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: memory_limit
+      value: 1024M
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
+
+  - name: set PHP post_max_size
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: post_max_size
+      value: 512M
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
+
+  - name: set PHP upload_max_filesize
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: upload_max_filesize
+      value: 512M
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
+
+  - name: set PHP max_input_vars
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: max_input_vars
+      value: 3000
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
+
+  - name: set PHP max_input_time
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: max_input_time
+      value: 128
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
+
+  - name: set PHP max_execution_time
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: max_execution_time
+      value: "256"
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
+
+  - name: set PHP disable_functions
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: disable_functions
+      value: "exec,system,passthru,shell_exec,proc_close,proc_open,dl,popen,show_source,posix_kill,posix_mkfifo,posix_getpwuid,posix_setpgid,posix_setsid,posix_setuid,posix_setgid,posix_seteuid,posix_setegid,posix_uname"
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
+
+  - name: set PHP allow URL fopen
+    ini_file:
+      path: "{{item}}"
+      section: PHP
+      option: allow_url_fopen
+      value: "Off"
+    notify: 
+      - Restart Apache
+    with_items:
+      - "{{php_path}}"
