@@ -1,0 +1,10 @@
+---
+- name: Copy universal.custom.php file # This file will override the settings.
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: webuzo
+    group: webuzo
+    mode: 0660
+  with_items:
+    - { src: "universal.custom.php", dest: "/usr/local/webuzo/universal.custom.php"}

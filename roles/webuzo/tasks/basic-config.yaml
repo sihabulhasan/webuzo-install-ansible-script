@@ -8,10 +8,10 @@
     with_items:
       - 'fastestmirror=1'
       - 'max_parallel_downloads=10'
+  
   - name: Updating the server (same as dnf update)
-    dnf:
-      name: '*'
-      state: latest
+    shell: sudo dnf update -y
+
   - name: Install epel-release, telnet, wget and vim
     dnf:
       name:
@@ -41,11 +41,6 @@
   - name: Set timezone to Asia/Dhaka
     community.general.timezone:
       name: Asia/Dhaka
-
-  - name: Install python packages
-    pip:
-      name: lxml
-      executable: pip3
 
   - name: Remove local resolver from resolv.conf
     lineinfile:

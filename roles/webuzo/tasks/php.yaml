@@ -1,9 +1,4 @@
 ---
-  - name: Install PHP Versions
-    command: webuzo --installapp --soft="{{item}}"
-    with_items:
-      - "{{phpversions}}"  #location: group_vars > all > phpversions. From this location php versions are called by the app ids.
-
   - name: Set date.timezone for CLI
     lineinfile:
       dest: "{{item}}"

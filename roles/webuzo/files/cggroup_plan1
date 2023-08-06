@@ -1,0 +1,11 @@
+{
+    "cpuquota": "200",
+    "read_bw": "512M",
+    "write_bw": "512M",
+    "diskread": "512",
+    "diskwrite": "512",
+    "mem_max": "512M",
+    "memhigh": "1024M",
+    "maxtask": "20",
+    "owner": "root"
+}

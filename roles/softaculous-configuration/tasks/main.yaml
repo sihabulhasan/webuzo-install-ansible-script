@@ -1,4 +1,8 @@
 ---
+  - name: Copy custom configuration file
+    ansible.builtin.copy:
+      src: roles/softaculous-configuration/files/universal.custom.php
+      dest: /usr/local/softaculous/enduser/
   - name: Disable Outdated Scripts
     # Reference: https://www.softaculous.com/docs/cli/disable-outdated-scripts-cli/
     shell: /usr/local/emps/bin/php /usr/local/softaculous/cli.php --disable_outdated_script

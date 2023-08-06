@@ -19,11 +19,11 @@
     include_tasks: install-webuzo.yaml
     when: webuzo_installed is not defined
 
-  - name: Install MariaDB 10.6
-    include_tasks: mariadb.yaml
-
   - name: Setup PHP.ini config
     include_tasks: php.yaml
 
   - name: Copy Hositng Packages
     include_tasks: hostingplans.yaml
+
+  - name: Copy Custom Configuration file
+    include_tasks: custom-config.yaml

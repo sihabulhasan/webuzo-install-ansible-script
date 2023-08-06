@@ -9,6 +9,7 @@
   with_items:
     - { path: "/var/webuzo/plans/", mode: "0755" }
     - { path: "/var/webuzo/features", mode: "0755" }
+    - { path: "/var/webuzo/cgroups", mode: "0755" }
 
 
 - name: Copy hosting packages
@@ -19,7 +20,7 @@
     group: webuzo
     mode: 0770
   with_items:
-    - { src: "nut_starter", dest: "/var/webuzo/plans/pack1"}   # Packages are called from roles > webuzo > files
+    - { src: "basic_plan", dest: "/var/webuzo/plans/basic_plan"}   # Packages are called from roles > webuzo > files
   tags: webuzo
 
 - name: Copy hosting features
@@ -31,4 +32,15 @@
     mode: 0770
   with_items:
     - { src: "all_feature", dest: "/var/webuzo/features/all_feature"}   # Features are called from roles > webuzo > files
+  tags: webuzo
+
+- name: Copy cggroup resource limit plans
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: webuzo
+    group: webuzo
+    mode: 0644
+  with_items:
+    - { src: "cggroup_plan1", dest: "/var/webuzo/cgroups/cggroup_plan1"}
   tags: webuzo

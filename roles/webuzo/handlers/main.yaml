@@ -30,6 +30,3 @@
       name: redis
       state: started
       enabled: true
-
-  - name: Install Bind Soft
-    shell: webuzo --installapp --soft=34   #34 is Bind app id. The app id is collected from here: http://api.webuzo.com/apps.php

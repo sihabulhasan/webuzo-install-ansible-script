@@ -1,16 +1,10 @@
 ---
+# webuzo Variables File
+
   php_path:
-    - "/usr/local/apps/php73/etc/php.ini"
     - "/usr/local/apps/php74/etc/php.ini"
     - "/usr/local/apps/php80/etc/php.ini"
     - "/usr/local/apps/php81/etc/php.ini"
 
-  phpversions:
-  #The numbers are app ids. App ids are collected from here: http://api.webuzo.com/apps.php
-    #- "129"   #PHP 7.0
-    #- "133"   #PHP 7.1
-    #- "138"   #PHP 7.2
-    - "146"   #PHP 7.3
-    - "149"   #PHP 7.4
-    - "154"   #PHP 8.0
-    - "156"   #PHP 8.1
+  vars:
+  ansible_python_interpreter: /usr/bin/python3  # Specify the path to Python 3 interpreter
