@@ -1,0 +1,3 @@
+---
+  - name: Install Apache Hadoop
+    command: webuzo --installapp --soft=105   # 105 is Apache Hadoop app id. The app id is collected from here: http://api.webuzo.com/apps.php
