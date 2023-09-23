@@ -93,12 +93,7 @@
   - name: whitelisting IPs on CSF
     blockinfile:
       block: |
-        103.159.37.17 # IT Nut Hosting BD VPN
-        173.231.61.123 # IT Nut Hosting US VPN
-        66.85.139.211 # WHMCS IP (Request actually goes from host main IP) (Might not be needed)
-        66.85.139.210 # Hunter Server
-        103.229.46.186 # IT Nut Hosting Helpline Office IP
-        103.229.46.190 # IT Nut Hosting Helpline Office IP
+        27.147.204.199 # My Home IP
       state: present
       path: /etc/csf/csf.allow
     notify: 
