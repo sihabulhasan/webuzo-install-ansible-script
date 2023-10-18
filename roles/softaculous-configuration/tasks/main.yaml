@@ -1,0 +1,22 @@
+---
+  - name: Copy custom configuration file
+    ansible.builtin.copy:
+      src: roles/softaculous-configuration/files/universal.custom.php
+      dest: /usr/local/softaculous/enduser/
+  - name: Disable Outdated Scripts
+    # Reference: https://www.softaculous.com/docs/cli/disable-outdated-scripts-cli/
+    shell: /usr/local/emps/bin/php /usr/local/softaculous/cli.php --disable_outdated_script
+    ignore_errors: True
+  - name: disable File Management Sctips
+    # Reference: https://www.softaculous.com/docs/cli/enable-disable-scripts-cli/
+    # Script ID can be found in: /usr/local/softaculous/enduser/scripts.ser
+    # or https://www.softaculous.com/scripts.php
+    # 368=OwnCloud, 195=ProjectSend, 586=Nextcloud, 406=eXtplorer, 647=FileRun, 482=Monsta FTP, 136=OpenDocMan, 594=SeedDMS
+    shell: /usr/local/emps/bin/php /usr/local/softaculous/cli.php --disable_script --sid=368,195,586,406,647,482,136,594
+    ignore_errors: True
+    
+  - name: disable autofill directory during wordpress installation
+    # Reference: https://www.softaculous.com/docs/cli/update-softaculous-settings-from-cli/
+    # Universal.php: /usr/local/softaculous/enduser/universal.php
+    # Don't Prefill Directory Name = no_prefill
+    shell: /usr/local/emps/bin/php /usr/local/softaculous/cli.php --update_universal --no_prefill=1

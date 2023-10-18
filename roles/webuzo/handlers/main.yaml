@@ -1,0 +1,32 @@
+---
+  - name: Restart SSH Service
+    service:
+      name: sshd
+      state: restarted
+  - name: Restart Apache
+    service:
+      name: httpd
+      state: restarted
+      enabled: true
+
+  - name: restart mariadb
+    service: name=mariadb
+             enabled=yes
+             state=restarted
+
+  - name: Restart Exim
+    shell: |
+      /scripts/buildeximconf
+      /scripts/restartsrv_exim --restart
+  
+  - name: Start Memcached
+    service:
+      name: memcached
+      state: started
+      enabled: true
+
+  - name: Start Redis
+    service:
+      name: redis
+      state: started
+      enabled: true

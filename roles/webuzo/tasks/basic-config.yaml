@@ -1,0 +1,54 @@
+---
+  - name: Modify DNF config
+  # enable fastmirror and increase parallel downloads
+    lineinfile:
+      line: '{{ item }}'
+      state: present
+      path: /etc/dnf/dnf.conf
+    with_items:
+      - 'fastestmirror=1'
+      - 'max_parallel_downloads=10'
+  
+  - name: Updating the server (same as dnf update)
+    shell: sudo dnf update -y
+
+  - name: Install epel-release, telnet, wget and vim
+    dnf:
+      name:
+        - epel-release
+        - telnet
+        - wget
+        - vim
+      state: present
+
+  - name: install other packages after installing epel-release
+    dnf:
+      name:
+        - htop
+        - atop
+        - iftop
+        - python3
+        - screen
+        - tcpdump
+      state: present
+
+  - name: install perl module # It is needed for installing CSF Firewall
+    dnf:
+      name:
+        - perl
+      state: present
+      
+  - name: Set timezone to Asia/Dhaka
+    community.general.timezone:
+      name: Asia/Dhaka
+
+  - name: Remove local resolver from resolv.conf
+    lineinfile:
+      line: 'nameserver 127.0.0.1'
+      state: absent
+      path: /etc/resolv.conf
+  - name: Add 8.8.8.8 to resolve.conf
+    lineinfile:
+      line: 'nameserver 8.8.8.8'
+      state: present
+      path: /etc/resolv.conf

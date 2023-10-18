@@ -1,0 +1,10 @@
+---
+# webuzo Variables File
+
+  php_path:
+    - "/usr/local/apps/php74/etc/php.ini"
+    - "/usr/local/apps/php80/etc/php.ini"
+    - "/usr/local/apps/php81/etc/php.ini"
+
+  # vars:
+  # ansible_python_interpreter: /usr/bin/python3  # Specify the path to Python 3 interpreter
