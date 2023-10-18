@@ -1,4 +1,0 @@
----
-# CSF Firewall configuration
-  - name: Changing csf configuration
-    include_tasks: csf-configure.yaml

@@ -1,0 +1,8 @@
+---
+  - name: Create Addon Domains
+    command: cpapi2 --user=creativepacegrow AddonDomain addaddondomain dir=public_html/"{{item}}" newdomain="{{item}}" subdomain="{{item}}"
+    with_items:
+       - addon-domain-1
+       - addon-domain-2
+       - addon-domain-3
+       - addon-domain-4
